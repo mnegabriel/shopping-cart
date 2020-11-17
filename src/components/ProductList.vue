@@ -4,6 +4,7 @@
       <ul>
         <li v-for="product of products" :key='product.name'>
           {{product.title}} - R${{product.price}}
+          <button @click="addProductToCart(product)">add</button>
           </li>
       </ul>
   </div>
@@ -22,6 +23,12 @@ export default {
   computed: {
     products() {
       return this.$store.getters.availableProducts
+    }
+  },
+
+  methods: {
+    addProductToCart(product){
+      this.$store.dispatch('addProductToCart',product)
     }
   },
   
