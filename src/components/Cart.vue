@@ -6,20 +6,33 @@
               {{product.title}}  x{{product.quantity}} = R${{product.price * product.quantity}}
           </li>
       </ul>
-      <h3>Total: R${{cartTotal}}</h3>
+      <h3>Total: R${{total}}</h3>
+      <button @click="checkout">Checkout</button>
+      <p v-if="checkoutStatus">{{$store.state.checkoutStatus}}</p>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from "vuex"
 export default {
     name: "Cart",
     computed: {
-        products(){
-            return this.$store.getters.cartProducts
-        },
-        cartTotal(){
-            return this.$store.getters.cartTotal
-        }
+        ...mapGetters({
+            products: 'cartProducts',
+            total: "cartTotal"
+        }),
+        // products(){
+        //     return this.$store.getters.cartProducts
+        // },
+        // cartTotal(){
+        //     return this.$store.getters.cartTotal
+        // }
+        ...mapState({
+            checkoutStatus: 'checkoutStatus'
+        })
+    },
+    methods:{
+        ...mapActions(['checkout'])
     }
 }
 </script>
