@@ -8,7 +8,7 @@
       </ul>
       <h3>Total: R${{total}}</h3>
       <button @click="checkout">Checkout</button>
-      <p v-if="checkoutStatus">{{$store.state.checkoutStatus}}</p>
+      <p v-if="checkoutStatus">{{checkoutStatus}}</p>
   </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
         //     return this.$store.getters.cartTotal
         // }
         ...mapState({
-            checkoutStatus: 'checkoutStatus'
+            checkoutStatus: state => state.cart.checkoutStatus
         })
     },
     methods:{
